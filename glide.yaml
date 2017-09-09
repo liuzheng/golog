@@ -1,0 +1,3 @@
+package: github.com/liuzheng712/golog
+import:
+- package: github.com/op/go-logging
