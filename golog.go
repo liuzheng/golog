@@ -73,34 +73,34 @@ func Logs(logpath, frontend, backend string) (*logging.Logger, error) {
 
 func Debug(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Debugf(format, v...)
+		Log.Errorf("[%v] " + format, []interface{}{selector, v}...)
 	}
 }
 func Info(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Infof(format, v...)
+		Log.Infof("[%v] " + format, []interface{}{selector, v}...)
 	}
 }
 
 func Warn(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Warningf(format, v...)
+		Log.Warningf("[%v] " + format, []interface{}{selector, v}...)
 	}
 }
 
 func Error(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Errorf(format, v...)
+		Log.Errorf("[%v] " + format, []interface{}{selector, v}...)
 	}
 }
 
 func Critical(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Criticalf(format, v...)
+		Log.Criticalf("[%v] " + format, []interface{}{selector, v}...)
 	}
 }
 func Notice(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Noticef(format, v...)
+		Log.Noticef("[%v] " + format, []interface{}{selector, v}...)
 	}
 }
