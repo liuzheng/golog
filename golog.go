@@ -73,7 +73,7 @@ func Logs(logpath, frontend, backend string) (*logging.Logger, error) {
 
 func Debug(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Errorf("[%v] " + format, []interface{}{selector, v}...)
+		Log.Debugf("[%v] " + format, []interface{}{selector, v}...)
 	}
 }
 func Info(selector string, format string, v ...interface{}) {
