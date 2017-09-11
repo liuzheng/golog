@@ -82,12 +82,16 @@ func Info(selector string, format string, v ...interface{}) {
 	}
 }
 
+func Notice(selector string, format string, v ...interface{}) {
+	if *LogSelector == "*" || *LogSelector == selector {
+		Log.Noticef("[%v] " + format, []interface{}{selector, v}...)
+	}
+}
 func Warn(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
 		Log.Warningf("[%v] " + format, []interface{}{selector, v}...)
 	}
 }
-
 func Error(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
 		Log.Errorf("[%v] " + format, []interface{}{selector, v}...)
@@ -99,8 +103,13 @@ func Critical(selector string, format string, v ...interface{}) {
 		Log.Criticalf("[%v] " + format, []interface{}{selector, v}...)
 	}
 }
-func Notice(selector string, format string, v ...interface{}) {
+func Panic(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Noticef("[%v] " + format, []interface{}{selector, v}...)
+		Log.Panicf("[%v] " + format, []interface{}{selector, v}...)
+	}
+}
+func Fatal(selector string, format string, v ...interface{}) {
+	if *LogSelector == "*" || *LogSelector == selector {
+		Log.Fatalf("[%v] " + format, []interface{}{selector, v}...)
 	}
 }
