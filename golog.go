@@ -73,43 +73,43 @@ func Logs(logpath, frontend, backend string) (*logging.Logger, error) {
 
 func Debug(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Debugf("[%v] " + format, []interface{}{selector, v}...)
+		Log.Debugf("[%v] " + format, append([]interface{}{selector}, v...)...)
 	}
 }
 func Info(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Infof("[%v] " + format, []interface{}{selector, v}...)
+		Log.Infof("[%v] " + format, append([]interface{}{selector}, v...)...)
 	}
 }
 
 func Notice(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Noticef("[%v] " + format, []interface{}{selector, v}...)
+		Log.Noticef("[%v] " + format, append([]interface{}{selector}, v...)...)
 	}
 }
 func Warn(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Warningf("[%v] " + format, []interface{}{selector, v}...)
+		Log.Warningf("[%v] " + format, append([]interface{}{selector}, v...)...)
 	}
 }
 func Error(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Errorf("[%v] " + format, []interface{}{selector, v}...)
+		Log.Errorf("[%v] " + format, append([]interface{}{selector}, v...)...)
 	}
 }
 
 func Critical(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Criticalf("[%v] " + format, []interface{}{selector, v}...)
+		Log.Criticalf("[%v] " + format, append([]interface{}{selector}, v...)...)
 	}
 }
 func Panic(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Panicf("[%v] " + format, []interface{}{selector, v}...)
+		Log.Panicf("[%v] " + format, append([]interface{}{selector}, v...)...)
 	}
 }
 func Fatal(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Fatalf("[%v] " + format, []interface{}{selector, v}...)
+		Log.Fatalf("[%v] " + format, append([]interface{}{selector}, v...)...)
 	}
 }
