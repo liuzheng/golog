@@ -28,7 +28,7 @@ var (
 // time this is logged, the Redacted() function will be called.
 type Password string
 
-func init() {
+func Initial() {
 	Logs(*LogPath, *LogLevel, "INFO")
 }
 func (p Password) Redacted() interface{} {
