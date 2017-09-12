@@ -6,7 +6,7 @@ import (
 
 func TestNormalPrint(t *testing.T) {
     Debug("aa", "%v", "laskdfas")
-    Info("aa", "%v,%v", "laskdfas","ccc")
+    Info("aa", "%v, %v", "laskdfas","ccc")
     Warn("aa", "%v", "laskdfas")
     Error("aa", "%v", "laskdfas")
     Critical("aa", "%v", "laskdfas")

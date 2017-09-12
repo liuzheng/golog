@@ -29,7 +29,6 @@ var (
 type Password string
 
 func init() {
-	flag.Parse()
 	Logs(*LogPath, *LogLevel, "INFO")
 }
 func (p Password) Redacted() interface{} {
