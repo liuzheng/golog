@@ -19,7 +19,7 @@ var frontendformat = logging.MustStringFormatter(
 	`%{color}%{time:2006-01-02 15:04:05.000} %{callpath} %{id:03x}%{color:reset} %{message}`,
 )
 var (
-	LogLevel = flag.String("logleve", "INFO", "set the console log level")
+	LogLevel = flag.String("loglevel", "INFO", "set the console log level")
 	LogPath = flag.String("logpath", "", "set the logfile path")
 	LogSelector = flag.String("logselector", "*", "Using select string to filter the log")
 )
