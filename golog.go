@@ -99,7 +99,7 @@ func Error(selector string, format string, v ...interface{}) {
 
 func Critical(selector string, format string, v ...interface{}) {
 	if *LogSelector == "*" || *LogSelector == selector {
-		Log.Critical("[%v] " + format, append([]interface{}{selector}, v...)...)
+		Log.Criticalf("[%v] " + format, append([]interface{}{selector}, v...)...)
 	}
 }
 func Panic(selector string, format string, v ...interface{}) {
