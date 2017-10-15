@@ -15,7 +15,7 @@ var (
 	)
 
 	frontendformat = logging.MustStringFormatter(
-		`%{color}%{time:2006-01-02 15:04:05.000} %{level} %{message}`,
+		`%{color}%{time:2006-01-02 15:04:05.000} %{level} %{message}%{color:reset}`,
 	)
 	debug = false
 	logLevel = flag.String("loglevel", "INFO", "set the console log level")
@@ -37,7 +37,7 @@ func (p Password) Redacted() interface{} {
 func Logs(logpath, frontend, backend string) (*logging.Logger, error) {
 	if frontend == "DEBUG" {
 		frontendformat = logging.MustStringFormatter(
-			`%{color}%{time:2006-01-02 15:04:05.000} %{callpath} %{id:03x}%{color:reset} %{message}`,
+			`%{color}%{time:2006-01-02 15:04:05.000} %{callpath} %{id:03x}%{color:reset} %{message}%{color:reset}`,
 		)
 		debug = true
 	}
