@@ -17,9 +17,9 @@ var (
 	frontendformat = logging.MustStringFormatter(
 		`%{color}%{time:2006-01-02 15:04:05.000} %{level} %{message}%{color:reset}`,
 	)
-	debug = false
-	logLevel = flag.String("loglevel", "INFO", "set the console log level")
-	logPath = flag.String("logpath", "", "set the logfile path")
+	debug       = false
+	logLevel    = flag.String("loglevel", "INFO", "set the console log level")
+	logPath     = flag.String("logpath", "", "set the logfile path")
 	logSelector = flag.String("logselector", "*", "Using select string to filter the log")
 )
 
@@ -40,12 +40,22 @@ func Logs(logpath, frontend, backend string) (*logging.Logger, error) {
 			`%{color}%{time:2006-01-02 15:04:05.000} %{callpath} %{id:03x}%{color:reset} %{message}%{color:reset}`,
 		)
 		debug = true
+	} else {
+		frontendformat = logging.MustStringFormatter(
+			`%{color}%{time:2006-01-02 15:04:05.000} %{level} %{message}%{color:reset}`,
+		)
+		debug = false
 	}
 	if backend == "DEBUG" {
 		backendformat = logging.MustStringFormatter(
 			`%{time:2006-01-02 15:04:05.000} %{callpath} %{id:03x} %{message}`,
 		)
 		debug = true
+	} else {
+		backendformat = logging.MustStringFormatter(
+			`%{time:2006-01-02 15:04:05.000} %{level} %{message}`,
+		)
+		debug = false
 	}
 	Frontend := logging.NewLogBackend(os.Stderr, "", 0)
 	FrontendFormatter := logging.NewBackendFormatter(Frontend, frontendformat)
@@ -64,7 +74,7 @@ func Logs(logpath, frontend, backend string) (*logging.Logger, error) {
 			}
 
 		}
-		f, err := os.OpenFile(logpath, os.O_CREATE | os.O_APPEND | os.O_WRONLY, 0644)
+		f, err := os.OpenFile(logpath, os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644)
 		if err != nil {
 			return nil, err
 		}
@@ -83,14 +93,14 @@ func Logs(logpath, frontend, backend string) (*logging.Logger, error) {
 
 func Debug(selector string, format string, v ...interface{}) {
 	if *logSelector == "*" || *logSelector == selector {
-		Log.Debugf("[%v] " + format, append([]interface{}{selector}, v...)...)
+		Log.Debugf("[%v] "+format, append([]interface{}{selector}, v...)...)
 	}
 }
 
 func Info(selector string, format string, v ...interface{}) {
 	if *logSelector == "*" || *logSelector == selector {
 		if debug {
-			Log.Infof("[%v] " + format, append([]interface{}{selector}, v...)...)
+			Log.Infof("[%v] "+format, append([]interface{}{selector}, v...)...)
 		} else {
 			Log.Infof(format, v...)
 		}
@@ -100,7 +110,7 @@ func Info(selector string, format string, v ...interface{}) {
 func Notice(selector string, format string, v ...interface{}) {
 	if *logSelector == "*" || *logSelector == selector {
 		if debug {
-			Log.Noticef("[%v] " + format, append([]interface{}{selector}, v...)...)
+			Log.Noticef("[%v] "+format, append([]interface{}{selector}, v...)...)
 		} else {
 			Log.Noticef(format, v...)
 		}
@@ -110,7 +120,7 @@ func Notice(selector string, format string, v ...interface{}) {
 func Warn(selector string, format string, v ...interface{}) {
 	if *logSelector == "*" || *logSelector == selector {
 		if debug {
-			Log.Warningf("[%v] " + format, append([]interface{}{selector}, v...)...)
+			Log.Warningf("[%v] "+format, append([]interface{}{selector}, v...)...)
 		} else {
 			Log.Warningf(format, v...)
 		}
@@ -120,7 +130,7 @@ func Warn(selector string, format string, v ...interface{}) {
 func Error(selector string, format string, v ...interface{}) {
 	if *logSelector == "*" || *logSelector == selector {
 		if debug {
-			Log.Errorf("[%v] " + format, append([]interface{}{selector}, v...)...)
+			Log.Errorf("[%v] "+format, append([]interface{}{selector}, v...)...)
 		} else {
 			Log.Errorf(format, v...)
 		}
@@ -130,7 +140,7 @@ func Error(selector string, format string, v ...interface{}) {
 func Critical(selector string, format string, v ...interface{}) {
 	if *logSelector == "*" || *logSelector == selector {
 		if debug {
-			Log.Criticalf("[%v] " + format, append([]interface{}{selector}, v...)...)
+			Log.Criticalf("[%v] "+format, append([]interface{}{selector}, v...)...)
 		} else {
 			Log.Criticalf(format, v...)
 		}
@@ -140,7 +150,7 @@ func Critical(selector string, format string, v ...interface{}) {
 func Panic(selector string, format string, v ...interface{}) {
 	if *logSelector == "*" || *logSelector == selector {
 		if debug {
-			Log.Panicf("[%v] " + format, append([]interface{}{selector}, v...)...)
+			Log.Panicf("[%v] "+format, append([]interface{}{selector}, v...)...)
 		} else {
 			Log.Panicf(format, v...)
 		}
@@ -150,7 +160,7 @@ func Panic(selector string, format string, v ...interface{}) {
 func Fatal(selector string, format string, v ...interface{}) {
 	if *logSelector == "*" || *logSelector == selector {
 		if debug {
-			Log.Fatalf("[%v] " + format, append([]interface{}{selector}, v...)...)
+			Log.Fatalf("[%v] "+format, append([]interface{}{selector}, v...)...)
 		} else {
 			Log.Fatalf(format, v...)
 		}
