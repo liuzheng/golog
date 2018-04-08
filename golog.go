@@ -11,11 +11,11 @@ var (
 	Log = logging.MustGetLogger("example")
 
 	backendformat = logging.MustStringFormatter(
-		`%{time:2006-01-02 15:04:05.000} %{level} %{message}`,
+		`%{time:2006-01-02 15:04:05.000} %{callpath} %{id:03x} %{message}`,
 	)
 
 	frontendformat = logging.MustStringFormatter(
-		`%{color}%{time:2006-01-02 15:04:05.000} %{level} %{message}%{color:reset}`,
+		`%{color}%{time:2006-01-02 15:04:05.000} %{callpath} %{id:03x}%{color:reset} %{message}`,
 	)
 	debug       = false
 	logLevel    = flag.String("loglevel", "INFO", "set the console log level")
