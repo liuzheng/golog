@@ -1,10 +1,10 @@
 package golog
 
 import (
+	"flag"
 	"github.com/op/go-logging"
 	"os"
 	"path/filepath"
-	"flag"
 )
 
 var (
@@ -18,7 +18,7 @@ var (
 		`%{color}%{time:2006-01-02 15:04:05.000} %{callpath} %{id:03x}%{color:reset} %{message}`,
 	)
 	debug       = false
-	logLevel    = flag.String("loglevel", "INFO", "set the console log level")
+	logLevel    = flag.String("loglevel", "", "set the console log level")
 	logPath     = flag.String("logpath", "", "set the logfile path")
 	logSelector = flag.String("logselector", "*", "Using select string to filter the log")
 )
@@ -28,13 +28,20 @@ var (
 type Password string
 
 func Initial() {
-	Logs(*logPath, *logLevel, "INFO")
+	if *logLevel == "" {
+		Logs(*logPath, "INFO", "INFO")
+	} else {
+		Logs(*logPath, *logLevel, "INFO")
+	}
 }
 func (p Password) Redacted() interface{} {
 	return logging.Redact(string(p))
 }
 
 func Logs(logpath, frontend, backend string) (*logging.Logger, error) {
+	if *logLevel != "" {
+		frontend = *logLevel
+	}
 	if frontend == "DEBUG" {
 		frontendformat = logging.MustStringFormatter(
 			`%{color}%{time:2006-01-02 15:04:05.000} %{callpath} %{id:03x}%{color:reset} %{message}%{color:reset}`,
