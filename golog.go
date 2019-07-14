@@ -28,6 +28,7 @@ var (
 type Password string
 
 func init() {
+    flag.Parse()
 	if *logLevel == "" {
 		Logs(*logPath, "INFO", "INFO")
 	} else {
