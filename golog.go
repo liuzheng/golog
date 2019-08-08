@@ -27,8 +27,7 @@ var (
 // time this is logged, the Redacted() function will be called.
 type Password string
 
-func init() {
-    flag.Parse()
+func Initial() {
 	if *logLevel == "" {
 		Logs(*logPath, "INFO", "INFO")
 	} else {
